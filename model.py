@@ -39,6 +39,15 @@ class SuspeitoModel:
             cursor.execute("SELECT id, nome, crime, periculosidade FROM suspeitos")
             return cursor.fetchall()
 
+    def filtrar_por_periculosidade(self, minimo):
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT id, nome, crime, periculosidade FROM suspeitos WHERE periculosidade >= ?",
+                (minimo,)
+            )
+            return cursor.fetchall()
+
     def deletar_suspeito(self, suspeito_id):
         with sqlite3.connect(self.db_name) as conn:
             cursor = conn.cursor()

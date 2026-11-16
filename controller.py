@@ -2,10 +2,21 @@ from model import SuspeitoModel
 from view import SuspeitoView
 
 
+#Adicione um método filtrar_por_periculosidade(minimo) no Model e 
+# uma opção no menu para listar apenas suspeitos de alto risco.
+
+
 class SuspeitoController:
     def __init__(self):
         self.model = SuspeitoModel()
         self.view = SuspeitoView()
+
+    def filtrar_por_periculosidade(self, minimo):
+        try:
+            suspeitos_filtrados = self.model.filtrar_por_periculosidade(minimo)
+            self.view.mostrar_lista(suspeitos_filtrados)
+        except ValueError:
+            self.view.mostrar_mensagem("Erro: O nível mínimo deve ser um número inteiro.")
 
     def iniciar(self):
         while True:
@@ -29,9 +40,11 @@ class SuspeitoController:
                         self.view.mostrar_mensagem("ID não encontrado.")
                 except ValueError:
                     self.view.mostrar_mensagem("Erro: O ID deve ser um número inteiro.")
+            elif opcao == '4':
+                minimo = int(self.view.obter_nivel_minimo())
+                self.filtrar_por_periculosidade(minimo)
             elif opcao == '0':
                 self.view.mostrar_mensagem("Encerrando sistema...")
                 break
             else:
                 self.view.mostrar_mensagem("Opção inválida!")
-

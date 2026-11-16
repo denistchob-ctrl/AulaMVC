@@ -4,6 +4,7 @@ class SuspeitoView:
         print("1. Cadastrar Suspeito")
         print("2. Listar Todos")
         print("3. Remover Suspeito por ID")
+        print("4. Filtrar Suspeitos por Periculosidade")
         print("0. Sair")
         return input("Escolha uma opção: ")
 
@@ -15,6 +16,9 @@ class SuspeitoView:
 
     def obter_id_remocao(self):
         return input("ID do suspeito a remover: ")
+    
+    def obter_nivel_minimo(self):
+        return input("Nível mínimo de periculosidade: ")
 
     def mostrar_lista(self, suspeitos):
         print("\n--- 📋 FICHA CRIMINAL ---")
